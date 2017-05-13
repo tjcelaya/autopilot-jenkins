@@ -54,3 +54,8 @@ curl -O https://raw.githubusercontent.com/joyent/sdc-docker/master/tools/sdc-doc
 ```
 
 Check that everything is configured correctly by running `./setup.sh`. This will check that your environment is setup correctly and will create an `_env` file that includes the credentials and variables that we'll inject into the Jenkins container. You may wish to edit this file with a password for the Jenkins default admin user.
+
+Note:
+ - `SDC_URL` and `SDC_ACCOUNT` are _required_ fields when deploying to Triton Public Cloud.
+ - The nginx image also implements the Autopilot Pattern. The current implementation of this repo results in Nginx only allowing access to Jenkins once TLS certificates have been set up. This will not take place unless the `ACME_DOMAIN` and `ACME_ENV` values in [`docker-compose.yml`](./docker-compose.yml#L21) are set (or populated through \_env). See the SSL with LetsEncrypt section of Joyent's article on [Autopilot Pattern with Wordpress and automatic SSL](https://www.joyent.com/blog/wordpress-on-autopilot-with-ssl) for more details.
+
